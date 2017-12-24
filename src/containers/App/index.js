@@ -1,20 +1,33 @@
 // Core
 import React, { Component } from 'react';
 
-// Instruments
-import Styles from './styles';
-import moment from 'moment';
+import avatar from '../../theme/assets/lisa.png';
+
+import {string, shape} from "prop-types"
+
+
+
+const options = {
+    avatar,
+    firstName: "Lisa",
+    lastName: "Simpson"
+};
+
+import Feed from "../../components/Feed";
 
 export default class App extends Component {
-
-    timer = setInterval(() => this.forceUpdate(), 1000);
+    static childContextTypes = {
+        avatar: string,
+        firstName: string,
+        lastName: string
+    }
+    getChildContext(){
+        return options;
+    }
 
     render () {
         return (
-            <section className = { Styles.app }>
-                <h1>Welcome!</h1>
-                <p>It is {moment().format('MMMM D h:mm:ss a')}.</p>
-            </section>
+                <Feed/>
         );
     }
 }
